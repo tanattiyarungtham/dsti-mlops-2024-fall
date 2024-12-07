@@ -30,4 +30,5 @@ RUN pip install --upgrade pip && pip --no-cache-dir install \
     pandas==1.1.5 \
     seaborn==0.11.1 \
     scikit-learn==0.24.2 \
+    matplotlib==3.2.2 \
     jupyter==1.0.0
