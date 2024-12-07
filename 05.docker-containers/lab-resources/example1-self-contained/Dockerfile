@@ -1,5 +1,3 @@
-
-    
 FROM python:3.9-slim
 
 LABEL maintainer="Tanattiya Rungtham <tanattiya@example.com>" \
@@ -7,12 +5,20 @@ LABEL maintainer="Tanattiya Rungtham <tanattiya@example.com>" \
 
 WORKDIR /app
 
-COPY . /app
+# Set locale for UTF-8 support
+RUN apt-get update && apt-get install -y locales && \
+    locale-gen en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
 
+# Set environment variable for Matplotlib
 ENV MPLLOCALFREETYPE=1
 
-RUN apt-get update && apt-get install -y \
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
+    pkg-config \
     libatlas-base-dev \
     liblapack-dev \
     gfortran \
@@ -21,15 +27,15 @@ RUN apt-get update && apt-get install -y \
     libjpeg-dev \
     && rm -rf /var/lib/apt/lists/*
 
+# Install Python dependencies
 RUN pip install --upgrade pip && pip --no-cache-dir install \
-    numpy==1.19.5 \
-    pandas==1.1.5 \
-    seaborn==0.11.1 \
-    scikit-learn==0.24.2 \
-    matplotlib==3.2.2 \
+    numpy==1.21.6 \
+    pandas==1.3.5 \
+    seaborn==0.11.2 \
+    scikit-learn==1.0.2 \
+    matplotlib==3.5.1 \
     jupyter==1.0.0
 
 EXPOSE 8888
 
 CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
-
