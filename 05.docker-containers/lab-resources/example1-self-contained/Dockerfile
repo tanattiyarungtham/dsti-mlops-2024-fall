@@ -13,7 +13,7 @@ WORKDIR /app
 COPY . /app
 
 # Install the required libraries
-RUN pip install --upgrade pip && pip --no-cache-dir install numpy pandas seaborn sklearn jupyter
+#RUN pip install --upgrade pip && pip --no-cache-dir install numpy pandas seaborn sklearn jupyter
 
 # Make port 8888 available to the world outside this container
 EXPOSE 8888
@@ -22,4 +22,12 @@ EXPOSE 8888
 CMD ["jupyter", "notebook", "--ip='0.0.0.0'", "--port=8888", "--no-browser", "--allow-root"]
 
 # Build the container with: docker build -t iris-data .
+
 # Run the container with: docker run -p 8888:8888 iris-data
+
+RUN pip install --upgrade pip && pip --no-cache-dir install \
+    numpy==1.19.5 \
+    pandas==1.1.5 \
+    seaborn==0.11.1 \
+    scikit-learn==0.24.2 \
+    jupyter==1.0.0
