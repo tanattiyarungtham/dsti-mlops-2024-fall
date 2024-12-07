@@ -9,6 +9,8 @@ WORKDIR /app
 
 COPY . /app
 
+ENV MPLLOCALFREETYPE=1
+
 RUN apt-get update && apt-get install -y \
     build-essential \
     libatlas-base-dev \
@@ -31,4 +33,3 @@ EXPOSE 8888
 
 CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
 
-ENV MPLLOCALFREETYPE=1
