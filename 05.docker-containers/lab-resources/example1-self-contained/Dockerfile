@@ -39,3 +39,7 @@ RUN pip install --upgrade pip && pip --no-cache-dir install \
 EXPOSE 8888
 
 CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
+
+# Build the container with: docker build -t iris-data .
+
+# Run the container with: docker run -p 8888:8888 iris-data
